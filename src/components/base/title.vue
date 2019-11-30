@@ -2,7 +2,7 @@
 <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#147be0!important; padding:0px;" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="/" class="navbar-brand" style="margin:0;padding:0;"><img v-bind:src="logo_pic" style="height: 50px;margin: 15px;"></a>
+            <a href="#" class="navbar-brand" style="margin:0;padding:0;"><img v-bind:src="logo_pic" style="height: 50px;margin: 15px;"></a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
                 <span class="sr-only">切换导航</span>
                 <span class="icon-bar"></span>
@@ -11,7 +11,7 @@
             </button>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
-            <ul class="nav navbar-nav navbar-left" style="margin-top:0;margin-left:0px;">
+            <ul class="nav navbar-nav navbar-left" style="margin-top:0;margin-left:35px;">
       				<li v-for="(menu,index) in menus">
       					<router-link :to="{path:menu.router}">
       						<i v-bind:class="menu.icon" aria-hidden="true"></i>
@@ -19,13 +19,13 @@
       					</router-link>
       				</li>
             </ul>
-			<ul class="nav navbar-nav navbar-right" >
+			   <ul class="nav navbar-nav navbar-right" >
 		     	<li>
-					<a href="#">
-						<i class="fa fa-user-circle" aria-hidden="true"></i>
-						<div>admin</div>
-					</a>
-				</li>
+            <router-link :to="{path: '/admin'}">
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              <div>admin</div>
+            </router-link>
+				  </li>
 		     	<li>
 					<a href="#">
 						<i class="fa fa-bell-o" aria-hidden="true"></i>

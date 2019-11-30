@@ -1,5 +1,5 @@
 <template>
-<div id="home">
+<div id="admin">
   <pagetitle></pagetitle>
   <Menu></Menu>
   <div id="content">
@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import Menu from '../menu/log_menu'
+import Menu from '../menu/admin_menu'
 export default {
-  name: 'asset',
+  name: 'admin',
   components: {
        Menu
   },

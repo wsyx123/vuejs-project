@@ -4,9 +4,7 @@
   <pagetitle></pagetitle>
 
   <div id="home-content">
-    <overview></overview>
-    <resource></resource>
-    <monitor></monitor>
+    <span>日志平台</span>
   </div>
 </div>
 </template>
