@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div id="content-menu">
+  <div id="right-main-title">
     <div id="host-title">
       <span>业务系统:</span>
       <select>
@@ -10,9 +10,9 @@
     </div>
     
   </div>
-  <div id="cluster">
-        <div class="favorite">
-          <div class="widget-box" style="min-height: 620px;" id="business">
+  <div id="right-main-content">
+        <div id="business-tree">
+          <div class="widget-box" style="min-height: 570px;" id="business">
             <div style="margin: 5px; ">
               <input type="text" name="" placeholder="请输入主机或组件名称" @keyup.13="inputKeyUp" v-model="searchText" style="width: 100%;">
             </div>
@@ -35,9 +35,8 @@
                 <td width="40"><input type="checkbox"></td>
                 <td >内网IP</td>
                 <td >主机名称</td>
-                <td >运维人员</td>
+                <td >操作系统</td>
                 <td >添加时间</td>
-                <td >生命周期</td>
               </tr>
             </thead>
             <tbody>
@@ -47,7 +46,7 @@
                 <td>1</td>
                 <td>1</td>
                 <td>1</td>
-                <td>1</td>
+                
               </tr>
               <tr>
                 <td><input type="checkbox" ref="mybox"></td>
@@ -55,7 +54,7 @@
                 <td>1</td>
                 <td>1</td>
                 <td>1</td>
-                <td>1</td>
+                
               </tr>
             </tbody>
           </table>
@@ -71,10 +70,7 @@
 import VJstree from 'vue-jstree'
 import echarts from 'echarts'
 import paging from './common/paging'
-let clusters = [
-{ID:'web01',name:'DBM前端',createtime:'2018-05-01 14:36:49',nodes:'3',status:'running'},
-{ID:'Portal01',name:'Portal门户',createtime:'2018-05-01 14:36:49',nodes:'3',status:'unknown'},
-        ]
+
 export default {
   name: 'dashboard',
   components:{
@@ -82,8 +78,6 @@ export default {
   },
   data () {
     return {
-      name:'yangxu',
-      clusters:clusters,
       searchText: '',
       data: [
           {
@@ -154,35 +148,15 @@ export default {
 tr {
     border-top: 0px;
 }
-#content-menu{
-  position: fixed;
-  top: 78px;
-  height:60px;
-  left: 220px;
-  right: 0;
-  background-color: #fff;
-  border-bottom: 1px solid #e1e1e1;
-  font-size: 18px;
-  z-index: 5;
-}
 
 #host-title{
   margin:17px 10px;
 }
 
-#cluster{
-  position: fixed;
-  top: 138px;
-  left: 220px;
-  right: 0;
-  background-color: #fff;
-  border-bottom: 1px solid #e1e1e1;
-  z-index: 5;
-}
 
 .widget-box{
   border: 1px solid #ddd;
-  margin-right: 5px;
+  margin: 5px;
 }
 
 select{
@@ -193,19 +167,22 @@ select{
 #page{
   margin: 25px 0px 0px 5px;
 }
-em{
-  color: red;
-}
+
 .favorite{
   position: relative;
   width: 25%;
   float: left;
 }
 
+#business-tree{
+  position: relative;
+  width: 23%;
+  float: left;
+}
+
 .list{
   position: relative;
-  padding: 10px;
-  width: 75%;
+  width: 77%;
   float: left;
 }
 .red{

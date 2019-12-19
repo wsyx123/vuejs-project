@@ -2,17 +2,18 @@
 <div>
   <div class='paging'>
     <div>
-      共<span>1</span>台主机,每页显示
+      每页显示
       <select>
         <option>20</option>
         <option>50</option>
         <option>100</option>
       </select>
+      共<span>{{total}}</span>条记录
     </div>
     <div class='p-action'>
       <span class='page-action page-action-backward'><i class="glyphicon glyphicon-step-backward"></i></span>
       <span class='page-action page-action-left'><i class="glyphicon glyphicon-chevron-left"></i></span>
-      <span class='page-number'>1</span>/<span class='page-total'>10</span>
+      <span class='page-number'>1</span>/<span class='page-total'>1</span>
       <span class='page-action page-action-right'><i class="glyphicon glyphicon-chevron-right"></i></span>
       <span class='page-action page-action-forward'><i class="glyphicon glyphicon-step-forward"></i></span>
     </div>
@@ -22,6 +23,7 @@
 
 <script>
 export default {
+  props:['total']
 
 }
 </script>

@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import {loginAPI,loginAPI1} from '@/utils/api'
 export default {
   name: 'App',
   data(){
@@ -47,6 +48,7 @@ export default {
       noticeMsg: "",
       username: "",
       password: "",
+      data: "",
       screenHeight: document.documentElement.clientHeight//屏幕高度
     }
   },
@@ -56,22 +58,6 @@ export default {
       oIframe.style.height = (deviceHeight) + 'px';
   },
   methods:{
-    filterRouter:function(routers) { // 遍历后台传来的路由字符串，转换为组件对象
-      const accessedRouters = routers.filter(route => {
-          if (route.component) {
-              if (route.component === 'Home') { // Home组件特殊处理
-                  route.component = Home
-              } else {
-                  route.component = import('@/components/admin/' + route.component + '.vue')
-              }
-          }
-          if (route.children && route.children.length) {
-              route.children = this.filterRouter(route.children)
-          }
-          return true
-      })
-      return accessedRouters
-    },
     login:function(){
       const username = this.username.trim();
       const password = this.password.trim();
@@ -84,23 +70,28 @@ export default {
         this.isFail = true;
         this.noticeMsg = '请输入密码';
       }else{
-        this.isError = false;
-        this.isSuccess = true;
-        this.isFail = false;
-        this.isOk = true;
-        this.noticeMsg = '登录成功';
-        
-        //在sessionStorage 设置token, user, isLogin
-        sessionStorage.setItem('token','token');
-        sessionStorage.setItem('username',username);
-        sessionStorage.setItem('isLogin',true);
-        sessionStorage.setItem('role','管理员');
-        if(this.$route.query.redirect){
-          this.$router.push({path: this.$route.query.redirect,params:{ id:'1'}});
-        }else{
-          this.$router.push({path: '/admin'});
-        }
-        
+        const promise = loginAPI1(API.loginAPI,username,password);
+        promise.then((data) =>{
+          if (data.hasOwnProperty('token')){
+            //在sessionStorage 设置token, user, isLogin
+            sessionStorage.setItem('token',data['token']);
+            sessionStorage.setItem('role',data['role']);
+            sessionStorage.setItem('username',username);
+            sessionStorage.setItem('isLogin',true);
+            this.isSuccess = true;
+            this.isOk = true;
+            if(this.$route.query.redirect){
+              this.$router.push({path: this.$route.query.redirect,params:{ id:'1'}});
+            }else{
+              this.$router.push({path: '/'});
+            }
+          }else{
+            this.isError = true;
+            this.isFail = true;
+            this.noticeMsg = data['detail'];
+          }
+        })
+    
       }
     }
   }

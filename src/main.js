@@ -14,36 +14,33 @@ import {Parent,Children} from './permission/admin'
 Vue.config.productionTip = false // 阻止启动生产消息
 Vue.component('pagetitle', pagetitle)
 
-
- /* 获取配置文件信息 */
-axios.get('/static/config.json').then(res => {
-	const configData = res.data;
-	Vue.prototype.Apiserver = configData.logServer;
-})
-
 // http response 拦截器
 axios.interceptors.response.use(
   (response) => {
     return response;
   },function(error){
     const status = error.response.status;
+    const path = window.location.href;
+    var reg = RegExp(/login/);
+    if(path.split(':')[2].match(reg)){
+      return error.response
+    }
     // 如果认证失败 表明 token过期, 跳转到登录页面重新登录
-    if(status === 401){
+    else if(status === 401){
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('hasMenu');
       router.replace('/login');
     }
-    return error.response
   }
 );
 
 // 获取菜单和路由表
 function getMenusRouters(token){
-
-  axios.get('http://localhost:8080/menus',{
+  const tokenAuth = 'Token '+token;
+  axios.get(API.menusAPI,{
     headers:{
-      'content-type': 'application/json',
-      'token': token
+      'Authorization': tokenAuth,
+      'content-type': 'application/json'
     }
   }).then(res => {
     const data = res.data;
@@ -55,6 +52,13 @@ function getMenusRouters(token){
   })
 }
 
+// 404 路由
+
+const notFoundRoute = {
+  path: '*',
+  component: () => import('@/components/404.vue')
+}
+
 // 构造路由
 function formatRouters(routersData){
   const routersArray = []
@@ -62,6 +66,9 @@ function formatRouters(routersData){
     const routerDict = Parent[v['name']]
     routerDict['name'] = v['name']
     routerDict['path'] = v['path']
+    if(v.hasOwnProperty('redirect')){
+      routerDict['redirect'] = v['redirect']
+    }
     routerDict['children'] = []
     v['children'].forEach(c =>{
       const cDict = Children[c['name']]
@@ -71,6 +78,7 @@ function formatRouters(routersData){
     })
     routersArray.push(routerDict)
   })
+  routersArray.push(notFoundRoute)
   return routersArray;
 }
 
@@ -80,15 +88,16 @@ router.beforeEach((to, from, next) => {
   if (to.path != '/login'){ // 所有的非登录路由都要判断
     if (sessionStorage.token) { // 判断当前的user_id是否存在 ； 登录存入的user_id
       if(!sessionStorage.hasMenu){ // 如果还没有获取菜单则获取路由和菜单
-        getMenusRouters('token');
+        const token = sessionStorage.getItem('token');
+        getMenusRouters(token);
       	sessionStorage.setItem('hasMenu',true);
       }
       next();
     }
     else {
       next({
-        path: '/login',
-        query: {redirect: to.fullPath} // 将要跳转路由的path作为参数，传递到登录页面
+        path: '/login'
+        //query: {redirect: to.fullPath} // 将要跳转路由的path作为参数，传递到登录页面
       })
     }
   }
@@ -106,7 +115,6 @@ new Vue({
     if(sessionStorage.getItem('hasMenu')){
       const routers = JSON.parse(sessionStorage.getItem('routerItems'));
       const accessedRouters = formatRouters(routers);
-      console.log(accessedRouters);
       router.addRoutes(accessedRouters);
     }
   }

@@ -1,1 +1,74 @@
+/* 最顶部菜单*/
+.navbar-fixed-bottom, .navbar-fixed-top {
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+.navbar{
+  margin-bottom: 17px;
+}
+/*.navbar .nav .router-link-exact-active{
+  color: #fff!important;
+  background: rgba(0,0,0,0.35);
+}*/
 
+.navbar-default .navbar-nav>li>a {
+  width: 82px;
+  height: 70px;
+  text-align: center;
+  font-size: 13px;
+  color: #ffffff!important;
+}
+.navbar .nav > li > a:hover {
+  background: #25222259;
+}
+.navbar .nav > li > a:active {
+  color: #fff!important;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+  color: #555;
+  background-color: #25222259;
+}
+
+
+/* 左边菜单宽度*/
+#left-menu{
+	position:fixed;
+  width: 15%;
+  top: 70px;
+  bottom: 0;
+  z-index: 5;
+  border-right: 1px solid #e1e1e1;
+  background-color: #f7fafc;
+}
+
+/* 右边主窗口*/
+#right-main{
+	position: fixed;
+	left: 15%;
+}
+
+/* 右边主窗口 title*/
+#right-main-title{
+  position: fixed;
+  top: 70px;
+  height:60px;
+  width: 85%;
+  font-size: 18px;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+/* 右边主窗口 内容部分*/
+#right-main-content{
+  position: fixed;
+  left: 15%;
+  top: 130px;
+  width: 85%;
+  overflow: scroll;
+  bottom: 0;
+}
+
+
+/* 有树形结构部分css */

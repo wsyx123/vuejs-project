@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div id="menu">
+  <div id="left-menu">
     <div id="asset-title">{{username}}<span style="font-size: 14px;color:#C0C0C0;"> -{{role}}</span></div>
     <div>
       <div id="asset-host" v-for="(menu,index) in menus">
@@ -30,6 +30,8 @@ export default {
     signOut:function(){
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('hasMenu');
+      sessionStorage.removeItem('logMenuItems');
+      sessionStorage.removeItem('adminMenuItems');
       this.$router.push({path:'/login'});
     }
   }
@@ -38,16 +40,6 @@ export default {
 <style scoped>
 i{
   color:#167be0;
-}
-#menu{
-  position:fixed;
-  width: 220px;
-  top: 78px;
-  bottom: 0;
-  z-index: 5;
-  border-right: 1px solid #e1e1e1;
-  overflow: hidden;
-  background-color: #f7fafc;
 }
 #asset-title{
   height:60px;

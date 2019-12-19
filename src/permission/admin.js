@@ -11,20 +11,26 @@ import transmit from '@/components/log/transmit'
 
 
 export const Parent = {
-	  admin: {component: () => import('@/components/admin/admin')},
+    home:  {component: () => import('@/components/dashboard/Home')},
+	admin: {component: () => import('@/components/admin/admin')},
     log:   {component: () => import('@/components/log/log')}
 }
 
 export const Children = {
     business: {component: () => import('@/components/admin/business')},
     host:     {component: () => import('@/components/admin/host')},
-    user:     {component: () => import('@/components/admin/business')},
+    user:     {component: () => import('@/components/admin/user')},
+    system:     {component: () => import('@/components/admin/system')},
+    newDatasource:{component: () => import('@/components/admin/newDatasource')},
     role:     {component: () => import('@/components/admin/business')},
     info:     {component: () => import('@/components/admin/business')},
     search:           {component: search},
     analysis:         {component: analysis},
     newDashboard:     {component: newDashboard},
     importDashboard:  {component: importDashboard},
+    viewDashboard:    {component: () => import('@/components/log/viewDashboard')},
     join:             {component: join},
-    transmit:         {component: transmit}
+    transmit:         {component: transmit},
+    alarmset:         {component: log},
+    alarmlist:        {component: log}
 }

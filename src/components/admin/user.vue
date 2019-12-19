@@ -1,7 +1,7 @@
 <template>
 <div>
   <div id="right-main-title">
-    <div id="host-title">业务管理</div>
+    <div id="host-title">用户管理</div>
     <div class='menu-button'>
       <div class='action-button'><button class="action-button-publish">新增</button></div>
       <div class='action-button'><button class="action-button-scale">编辑</button></div>
@@ -20,23 +20,26 @@
           <thead>
             <tr>
               <td width="40"><input @click="chose_cancel_all" type="checkbox"></td>
-              <td >业务名称</td>
-              <td>业务简称</td>
-              <td >业务运维人</td>
-              <td >创建时间</td>
-              <td >生命周期</td>
+              <td>用户名</td>
+              <td>邮箱</td>
+              <td>激活状态</td>
+              <td>用户角色</td>
+              <td>加入日期</td>
+              <td>最近登录</td>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(business,index) in businesses">
+            <tr v-for="(user,index) in users">
               <td><input type="checkbox" ref="mybox"></td>
-              <td>{{business.name}}</td>
-              <td>{{business.shortname}}</td>
-              <td><span v-for="(user,index) in business.users" class="label label-default">{{user.username}}</span></td>
-              <td>{{business.create_time}}</td>
-              <td v-if="business.life_cycle == 1"><span class="label label-primary">测试</span></td>
-              <td v-if="business.life_cycle == 2"><span class="label label-success">上线</span></td>
-              <td v-if="business.life_cycle == 3"><span class="label label-default">下线</span></td>
+              <td>{{user.username}}</td>
+              <td>{{user.email}}</td>
+              <td>
+                <span v-if="user.is_active" class="label label-success">true</span>
+                <span v-else class="label label-default">false</span>
+              </td>
+              <td>{{user.is_superuser}}</td>
+              <td>{{user.date_joined}}</td>
+              <td>{{user.last_login}}</td>
             </tr>
           </tbody>
         </table>
@@ -57,7 +60,7 @@ export default {
   },
   data () {
     return {
-      businesses: [],
+      users: [],
       total : 0
     }
   },
@@ -75,9 +78,9 @@ export default {
   },
   mounted(){
     const token = sessionStorage.getItem('token');
-    const bpromise = getAPItoken(API.businessAPI,token);
+    const bpromise = getAPItoken(API.userAPI,token);
     bpromise.then((data) =>{
-      this.businesses = data;
+      this.users = data;
       this.total = data.length;
     })
   }

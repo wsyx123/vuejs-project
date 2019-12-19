@@ -23,7 +23,7 @@
 		     	<li>
             <router-link :to="{path: '/admin'}">
               <i class="fa fa-user-circle" aria-hidden="true"></i>
-              <div>admin</div>
+              <div>用户中心</div>
             </router-link>
 				  </li>
 		     	<li>
@@ -53,14 +53,7 @@ export default {
   		logo_pic:logo_pic,
     	menus:[
     		{name:'首页',icon:'fa fa-2x fa-home',router:'/'},
-    		//{name:'资产管理',icon:'fa fa-2x fa-desktop',router:'/asset'},
-    		//{name:'作业中心',icon:'fa fa-2x fa-coffee',router:'/task'},
-    		//{name:'任务调度',icon:'fa fa-2x fa-cogs',router:'/schedule'},
-    		{name:'日志搜索',icon:'fa fa-2x fa-file-text-o',router:'/log/search'},
-    		//{name:'监控告警',icon:'fa fa-2x fa-bar-chart',router:'/alert'},
-    		//{name:'PAAS',icon:'fa fa-2x fa-cloud',router:'/paas'},
-    		//{name:'应用发布',icon:'fa fa-2x fa-cube',router:'/app'},
-    		//{name:'系统管理',icon:'fa fa-2x fa-cog',router:'/system'}
+    		{name:'日志搜索',icon:'fa fa-2x fa-file-text-o',router:'/log'}
     	]
   	}
     
@@ -71,36 +64,5 @@ export default {
 </script>
 
 <style scoped>
-.navbar-fixed-bottom, .navbar-fixed-top {
-    position: sticky;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-}
-.navbar{
-	margin-bottom: 17px;
-}
-.navbar .nav .router-link-exact-active{
-	color: #fff!important;
-  background: rgba(0,0,0,0.35);
-}
 
-.navbar-default .navbar-nav>li>a {
-	width: 82px;
-	height: 78px;
-	text-align: center;
-	font-size: 13px;
-  color: #ffffff!important;
-}
-.navbar .nav > li > a:hover {
-	background: #25222259;
-}
-.navbar .nav > li > a:active {
-	color: #fff!important;
-}
-
-.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
-  color: #555;
-  background-color: #25222259;
-}
 </style>

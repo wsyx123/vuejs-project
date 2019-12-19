@@ -4,6 +4,6 @@ thead{
   z-index: 5;
 }
 
-td{
-	text-align: center;
+td { 
+    text-align: left  
 }

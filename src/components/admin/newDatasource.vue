@@ -2,7 +2,7 @@
     <div class="accept-container">
         <div id="host-title">
           <div class="row">
-            <div class="col-sm-6">Grafana</div>
+            <div class="col-sm-6">Grafana 数据源</div>
             <div class="col-sm-6" style="text-align: right;">
               <button type="button" class="btn btn-default">取消</button>
           </div>
@@ -24,16 +24,20 @@ export default {
         src:""
         }
     },
+    methods:{
+        test(){
+            this.$ajax.post(API.grafanaLoginAPI,{user:"admin",password:"admin"}).then((response)=>{ console.log(response);})
+        }
+    },
     mounted(){
+        this.test();
         const oIframe = document.getElementById('show-iframe');
         const deviceWidth = document.documentElement.clientWidth;
         const deviceHeight = document.documentElement.clientHeight;
         oIframe.style.width = (deviceWidth*0.85) + 'px';
         oIframe.style.height = (deviceHeight*0.81) + 'px';
-        this.src = API.importDashboardAPI;
+        this.src = API.newDatasourceAPI;
        
-    },
-    methods:{
     }
 }
 </script>
@@ -42,9 +46,9 @@ export default {
 <style scoped>
 .accept-container{
   position: fixed;
-  top: 78px;
+  top: 70px;
   height:60px;
-  left: 220px;
+  left: 15%;
   right: 0;
   background-color: #fff;
   border-bottom: 1px solid #e1e1e1;

@@ -13,8 +13,6 @@ const commonRoutes = [
     }
   ]
 
-
-
 export default new Router({
   //mode:"history",
   routes: commonRoutes
