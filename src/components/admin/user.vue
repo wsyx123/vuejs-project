@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import paging from './common/paging'
+import paging from '@/components/common/paging'
 import {getAPItoken} from '@/utils/api'
 export default {
   components:{
@@ -88,7 +88,7 @@ export default {
 </script>
 
 <style scoped>
-@import './common/table.css';
+@import '../common/table.css';
 a{
   color:#333;
   text-decoration: underline;

@@ -19,6 +19,7 @@ export const Parent = {
 export const Children = {
     business: {component: () => import('@/components/admin/business')},
     host:     {component: () => import('@/components/admin/host')},
+    structure:     {component: () => import('@/components/admin/structure')},
     user:     {component: () => import('@/components/admin/user')},
     system:     {component: () => import('@/components/admin/system')},
     newDatasource:{component: () => import('@/components/admin/newDatasource')},
@@ -31,6 +32,8 @@ export const Children = {
     viewDashboard:    {component: () => import('@/components/log/viewDashboard')},
     join:             {component: join},
     transmit:         {component: transmit},
-    alarmset:         {component: log},
+    alarmset:         {component: () => import('@/components/log/alarmset')},
+    alarmcreate:      {component: () => import('@/components/log/alarmcreate')},
+    alarmedit:        {component: () => import('@/components/log/alarmcreate')},
     alarmlist:        {component: log}
 }

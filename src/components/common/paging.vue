@@ -42,7 +42,7 @@ export default {
   background-color: #33FF33;
 }
 .paging div{
-  margin: 20px;
+  margin: 20px 10px;
   display: inline-block;
 }
 

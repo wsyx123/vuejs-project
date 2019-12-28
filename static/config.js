@@ -11,5 +11,9 @@ const API = {
 	"grafanaHost": "http://localhost:8080",
 	"userAPI" : "http://localhost:8080/api/users/",
 	"indexAPI": "http://localhost:8080/api/index/",
-	"clusterAPI": "http://localhost:8080/api/clusters/"
+	"clusterAPI": "http://localhost:8080/api/clusters/",
+	"structureAPI": "http://localhost:8080/api/structure/",
+	"adminbusinessAPI" : "http://localhost:8080/api/admin/business/",
+	"alarmruleAPI" : "http://localhost:8080/api/alarmrule/",
+	"expressionAPI" : "http://localhost:8080/api/expression/"
 }

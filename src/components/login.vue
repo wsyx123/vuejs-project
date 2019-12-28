@@ -91,7 +91,6 @@ export default {
             this.noticeMsg = data['detail'];
           }
         })
-    
       }
     }
   }

@@ -11,55 +11,62 @@
     
   </div>
   <div id="right-main-content">
-        <div id="business-tree">
-          <div class="widget-box" style="min-height: 570px;" id="business">
-            <div style="margin: 5px; ">
-              <input type="text" name="" placeholder="请输入主机或组件名称" @keyup.13="inputKeyUp" v-model="searchText" style="width: 100%;">
-            </div>
-            <div class="widget-body">
-              <div style="padding: 0 10px;">
-                <v-jstree :data="data" draggable ref="tree"   @item-click="itemClick"></v-jstree>
-              </div>
-            </div>
+    <div id="business-tree">
+      <div class="widget-box">
+        <div style="margin: 5px; ">
+          <input type="text" name="" placeholder="请输入主机或组件名称" @keyup.13="inputKeyUp" v-model="searchText" style="width: 100%;">
+        </div>
+        <div class="widget-body">
+          <div style="padding: 0 10px;">
+            <v-jstree :data="data" draggable ref="tree"   @item-click="itemClick"></v-jstree>
           </div>
-        </div><!-- /.col -->
-        
-        <div class="list">
-          <div style="border-bottom: 1px solid #ddd; margin-bottom: 15px;">
-            <span style="padding: 10px; border-bottom: 2px solid #3497DA; display: inline-block;">主机属性</span>
-            <span style="padding: 10px 50px;">节点属性</span>
+        </div>
+      </div>
+    </div><!-- /.col -->
+    
+    <div class="list">
+      <div class="widget-box">
+        <div class="widget-body">
+          <div class="widget-main">
+            <div style="border-bottom: 1px solid #ddd; margin-bottom: 15px;">
+              <span style="padding: 10px; border-bottom: 2px solid #3497DA; display: inline-block;">主机属性</span>
+              <span style="padding: 10px 50px;">节点属性</span>
+            </div>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <td width="40"><input type="checkbox"></td>
+                  <td >内网IP</td>
+                  <td >主机名称</td>
+                  <td >操作系统</td>
+                  <td >添加时间</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" ref="mybox"></td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  
+                </tr>
+                <tr>
+                  <td><input type="checkbox" ref="mybox"></td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <td width="40"><input type="checkbox"></td>
-                <td >内网IP</td>
-                <td >主机名称</td>
-                <td >操作系统</td>
-                <td >添加时间</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><input type="checkbox" ref="mybox"></td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                
-              </tr>
-              <tr>
-                <td><input type="checkbox" ref="mybox"></td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                
-              </tr>
-            </tbody>
-          </table>
-        </div><!-- /.col -->
-        <paging></paging>
+        </div>
+      </div>
+      <paging></paging>
+    </div><!-- /.col -->
+      
   </div>
 
 </div>
@@ -69,7 +76,7 @@
 <script>
 import VJstree from 'vue-jstree'
 import echarts from 'echarts'
-import paging from './common/paging'
+import paging from '@/components/common/paging'
 
 export default {
   name: 'dashboard',
@@ -144,7 +151,7 @@ export default {
 </script>
 
 <style>
-@import './common/table.css';
+@import '../common/table.css';
 tr {
     border-top: 0px;
 }
@@ -162,10 +169,6 @@ tr {
 select{
   font-size: 15px;
   width: 180px;
-}
-
-#page{
-  margin: 25px 0px 0px 5px;
 }
 
 .favorite{

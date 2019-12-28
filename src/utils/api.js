@@ -55,3 +55,31 @@ export function postAPItoken(url,kwargs,token) {
     })
   });
 }
+
+export function patchAPItoken(url,kwargs,token){
+  const tokenAuth = 'Token '+token;
+  return  new Promise(resolve => {
+    axios.patch(url,kwargs,{
+      headers:{
+        'Authorization': tokenAuth,
+        'content-type': 'application/json'
+      }
+    }).then(response => {
+        resolve(response);
+    })
+  });
+}
+
+export function deleteAPItoken(url,kwargs,token){
+  const tokenAuth = 'Token '+token;
+  return  new Promise(resolve => {
+    axios.delete(url,{
+      headers:{
+        'Authorization': tokenAuth,
+        'content-type': 'application/json'
+      }
+    }).then(response => {
+        resolve(response.data);
+    })
+  });
+}

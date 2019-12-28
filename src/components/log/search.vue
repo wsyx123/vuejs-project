@@ -7,13 +7,13 @@
   <div id="right-main-title">
     <div id="host-title">
       <span>业务系统:</span>
-      <select v-model="business" @change="selectVal">
+      <select v-model="business" @change="selectBusiness">
         <option v-for="(business,index) in businesses" v-bind:value="business.id">{{business.name}}</option>
       </select>
       <div id="checktime">
         <label style="cursor: pointer;margin-right: 10px;" @click="quickSelectDisplay">{{time}}</label>
         <i class="fa fa-refresh" aria-hidden="true" @click="updateLogData"></i>
-    </div>
+      </div>
     </div>
   </div>
   <div id="quickselect" ref="quickselect">
@@ -55,108 +55,108 @@
     </div>
   </div>
   <div id="right-main-content">
-        <div id="business-tree">
-          <div class="widget-box">
-            <div style="margin: 5px;">
-              <input type="text" name="" placeholder="请输入主机或组件名称" @keyup.13="inputKeyUp" v-model="nodeSearchText" style="width: 100%;">
+      <div id="business-tree">
+        <div class="widget-box">
+          <div style="margin: 5px;">
+            <input type="text" name="" placeholder="请输入主机或组件名称" @keyup.13="inputKeyUp" v-model="nodeSearchText" style="width: 100%;">
+          </div>
+          <div class="widget-body">
+            <div style="padding: 0 10px;">
+              <v-jstree :data="tree" draggable ref="tree"   @item-click="nodeSearchFunc"></v-jstree>
             </div>
-            <div class="widget-body">
-              <div style="padding: 0 10px;">
-                <v-jstree :data="tree" draggable ref="tree"   @item-click="nodeSearchFunc"></v-jstree>
+          </div>
+        </div>
+      </div><!-- /.col -->
+      
+      <div class="list">
+        <div class="widget-box">
+          <div class="widget-body">
+            <div class="widget-main">
+              <div style="margin: 5px 12px 0px 12px;">
+                <ul class="nav navbar-nav">
+                  <li class="dropdown">
+                    <button  class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" >
+                      日志路径
+                      <b class="caret"></b>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <label class="control-label no-padding-right">
+                          &nbsp<input type="checkbox" class="ace ace-checkbox"><span class="lbl">&nbsp</span>
+                        </label>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <input type="text" v-model="logSearchInput" placeholder="关键字查询" style="width: 40%;margin-left: 40px;">
+                <button class="btn btn-sm btn-primary" @click="strSearchFunc">查询</button>
+                <button class="btn btn-sm btn-primary">下载</button>
+                <span style="margin-left: 20px;">interval</span>
+                <select v-model="interval">
+                  <option value="a">Auto</option>
+                  <option value="s">Second</option>
+                  <option value="m">Minute</option>
+                  <option value="h">Hourly</option>
+                  <option value="d">Daily</option>
+                  <option value="w">Weekly</option>
+                  <option value="M">Monthly</option>
+                  <option value="y">Yearly</option>
+                </select>
               </div>
-            </div>
-          </div>
-        </div><!-- /.col -->
-        
-        <div class="list">
-          <div class="widget-box">
-            <div class="widget-body">
-              <div class="widget-main">
-                <div style="margin: 5px 12px 0px 12px;">
-                  <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                      <button  class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" >
-                        日志路径
-                        <b class="caret"></b>
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <label class="control-label no-padding-right">
-                            &nbsp<input type="checkbox" class="ace ace-checkbox"><span class="lbl">&nbsp</span>
-                          </label>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                  <input type="text" v-model="logSearchInput" placeholder="关键字查询" style="width: 40%;margin-left: 40px;">
-                  <button class="btn btn-sm btn-primary" @click="strSearchFunc">查询</button>
-                  <button class="btn btn-sm btn-primary">下载</button>
-                  <span style="margin-left: 20px;">interval</span>
-                  <select v-model="interval">
-                    <option value="a">Auto</option>
-                    <option value="s">Second</option>
-                    <option value="m">Minute</option>
-                    <option value="h">Hourly</option>
-                    <option value="d">Daily</option>
-                    <option value="w">Weekly</option>
-                    <option value="M">Monthly</option>
-                    <option value="y">Yearly</option>
+              <div id="logStatis" style="width: 99%;height: 200px;"></div>
+              <div style="margin: 12px;" >
+                <ul class="nav">
+                  <li class="dropdown">
+                    <a  class="dropdown-toggle" data-toggle="dropdown" >
+                      日志显示
+                      <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li v-for="(key,index) in logkey" >
+                        <label class="control-label no-padding-right">
+                          &nbsp<input type="checkbox" class="ace ace-checkbox" @click="selectKey(key,$event)" :checked="displayKey(key)">&nbsp<span class="lbl">{{key}}</span>
+                        </label>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div style="margin: 12px;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th v-for="(key,index) in displayKeyList">{{key}}</th>
+                    </tr>
+                  </thead>
+                  <tbody style="font-family: 'Roboto Mono', Consolas, Menlo, Courier, monospace;font-size: 12.0px;">
+                    <tr v-for="(log,index) in loglist" >
+                      <td v-for="(key,index) in displayKeyList" v-html="log[key]"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div>
+                <label id="page">每页显示
+                  <select v-model="size">
+                    <option value="10">10</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
                   </select>
-                </div>
-                <div id="logStatis" style="width: 99%;height: 200px;"></div>
-                <div style="margin: 12px;" >
-                  <ul class="nav">
-                    <li class="dropdown">
-                      <a  class="dropdown-toggle" data-toggle="dropdown" >
-                        日志显示
-                        <b class="caret"></b>
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li v-for="(key,index) in logkey" >
-                          <label class="control-label no-padding-right">
-                            &nbsp<input type="checkbox" class="ace ace-checkbox" @click="selectKey(key,$event)" :checked="displayKey(key)">&nbsp<span class="lbl">{{key}}</span>
-                          </label>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-                <div style="margin: 12px;" id="displayMsg">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th v-for="(key,index) in displayKeyList">{{key}}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(log,index) in loglist" >
-                        <td v-for="(key,index) in displayKeyList" v-html="log[key]"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div>
-                  <label id="page">每页显示
-                    <select v-model="size">
-                      <option value="10">10</option>
-                      <option value="30">30</option>
-                      <option value="50">50</option>
-                    </select>
-                    /共{{logtotal}}条
-                  </label>
-                  <ul class="pagination pull-right">
-                      <li><a>首页</a></li>
-                      <li><a>&laquo;上一页</a></li>
-                      <li><a>1</a></li>
-                      <li><a>下一页&raquo;</a></li>
-                      <li><a>尾页</a></li>
-                  </ul>
-                </div>
-              </div><!-- widget-main-->
-            </div>
+                  /共{{logtotal}}条
+                </label>
+                <ul class="pagination pull-right">
+                    <li><a>首页</a></li>
+                    <li><a>&laquo;上一页</a></li>
+                    <li><a>1</a></li>
+                    <li><a>下一页&raquo;</a></li>
+                    <li><a>尾页</a></li>
+                </ul>
+              </div>
+            </div><!-- widget-main-->
           </div>
+        </div>
 
-        </div><!-- /.col -->
+      </div><!-- /.col -->
   </div>
 
 </div>
@@ -281,7 +281,7 @@ export default {
     ]
     })
     },
-    selectVal(){
+    selectBusiness(){
       const token = sessionStorage.getItem('token');
       const abc = getAPItoken(API.businessAPI+this.business+'/',token);
         abc.then((data) =>{
@@ -300,6 +300,8 @@ export default {
     },
     quickSelectEvent(event){
       this.time = event.currentTarget.innerHTML;
+      this.$refs.quickselect.style.display = 'none';
+      this.display = false;
     },
     displayKey(key){
       if(this.displayKeyList.indexOf(key) != -1){
@@ -377,11 +379,14 @@ export default {
           }else{
             this.isHidden = false;
             this.errmsg = data['msg'];
-            console.log(data);
           }
         })
     },
     nodeSearchFunc (node) { // 点击业务树的节点, 使用此节点作为日志查询条件
+      const selected = document.getElementsByClassName("tree-selected");
+      if(selected.length == 1){
+        selected[0].className='tree-anchor';
+      }
       this.nodeKey = node.model.node;
       if(this.nodeKey === 'host'){
         this.nodeParent = node.$parent.model.text;
@@ -400,20 +405,19 @@ export default {
     
   },
   created(){
-      this.token = sessionStorage.getItem('token');
-      //获取业务列表
-      const bpromise = getAPItoken(API.businessAPI,this.token);
-      bpromise.then((data) =>{
-        this.businesses = data;
-        this.business = this.businesses[0].id;
-        //获取某一业务的tree
-        const abc = getAPItoken(API.businessAPI+this.business+'/',this.token);
-        abc.then((data) =>{
-          this.tree = data;
-          this.logSearchFunc();
-        })
-      });
-
+    this.token = sessionStorage.getItem('token');
+    //获取业务列表
+    const bpromise = getAPItoken(API.businessAPI,this.token);
+    bpromise.then((data) =>{
+      this.businesses = data;
+      this.business = this.businesses[0].id;
+      //获取某一业务的tree
+      const abc = getAPItoken(API.businessAPI+this.business+'/',this.token);
+      abc.then((data) =>{
+        this.tree = data;
+        this.logSearchFunc();
+      })
+    });
   },
   mounted() {
       window.addEventListener('resize', this.resizeHandler);

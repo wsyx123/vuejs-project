@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div id="content-menu">
+  <div id="right-main-title">
     <div id="host-title">日志接入</div>
     <div class='menu-button'>
       <div class='action-button'><button class="action-button-publish">接入</button></div>
@@ -15,7 +15,7 @@
       </div>
     </div>
   </div>
-  <div id="cluster">
+  <div id="right-main-content">
       <div class="cluster-list">
         <table class="table">
           <thead>
