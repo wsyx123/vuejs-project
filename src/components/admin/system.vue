@@ -107,6 +107,51 @@
           </div>          
         </div>
       </div>
+
+      <div class="panel">
+        <div class="panel-heading">
+          <span class="title">告警程序运行详情</span>
+        </div>
+        <div class="panel-body" id="cluster" v-for="(cluster,index) in clusters">
+          <div class="cluster-left">
+            <div class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-4">运行模式:</label>
+                <div class="col-sm-8">
+                  <span>Standalone</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-4">主机:</label>
+                <div class="col-sm-8">
+                  <span>localhost:9001</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cluster-host">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>worker</th>
+                  <th>PID</th>
+                  <th>运行规则</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>worker0</td>
+                  <td>35698</td>
+                  <td>17,18</td>
+                  <td><span class="label label-danger">停止</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>   
+        </div>
+      </div>
+
   </div>
 
 </div>

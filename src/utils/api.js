@@ -70,6 +70,20 @@ export function patchAPItoken(url,kwargs,token){
   });
 }
 
+export function putAPItoken(url,kwargs,token){
+  const tokenAuth = 'Token '+token;
+  return  new Promise(resolve => {
+    axios.put(url,kwargs,{
+      headers:{
+        'Authorization': tokenAuth,
+        'content-type': 'application/json'
+      }
+    }).then(response => {
+        resolve(response.data);
+    })
+  });
+}
+
 export function deleteAPItoken(url,kwargs,token){
   const tokenAuth = 'Token '+token;
   return  new Promise(resolve => {

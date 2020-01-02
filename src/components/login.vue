@@ -3,8 +3,8 @@
     <div class="login-body  animated fadeInLeft">
         <div class="login-main pr">
           <form  class="login-form">
-            <h3> 日志平台 </h3>
-            <h5 style="padding-bottom: 10px"> Log Platform </h5>
+            <h3> 日志搜索平台 </h3>
+            <h5 style="padding-bottom: 10px"> Log Search Platform </h5>
                     <!-- 账号登陆 -->
             <div id="MobileBox" class="item-box">
               <div class="input-group user-name"> <span class="input-group-addon"><i class="fa fa-user"></i></span>

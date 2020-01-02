@@ -160,7 +160,7 @@
       </div>
       <div class="row">
         <div class="col-sm-2" id="title"><span class="red">*</span>启用告警压缩:</div>
-        <div class="col-sm-10"><input type="checkbox" class="switch_1" @click="enableCompress"></div>
+        <div class="col-sm-10"><input type="checkbox" class="switch_1" @click="enableCompress" :checked="ruleData.compress_enabled"></div>
       </div>
       <div class="row" v-if="ruleData.compress_enabled">
         <div class="col-sm-2" id="title"><span class="red">*</span>时间窗口:</div>
@@ -212,7 +212,7 @@
 </template>
 
 <script>
-import {getAPItoken,postAPItoken} from '@/utils/api'
+import {getAPItoken,postAPItoken,putAPItoken} from '@/utils/api'
 import {validateRule,showMessage} from '@/utils/function'
 export default {
   components:{
@@ -360,7 +360,6 @@ export default {
       }
     },
     notifyWayCheckedJudge(value){
-      console.log(this.ruleData.notify_way.indexOf(value))
       if(this.ruleData.notify_way.indexOf(value) != -1){
         return true
       }
@@ -397,10 +396,19 @@ export default {
     saveRule(){
       let validateResult = validateRule(this.ruleData)
       if(validateResult['status']){
-        let promise = postAPItoken(API.alarmruleAPI,this.ruleData,this.token);
+        if(this.$route.params.action == 'edit'){
+          var ruleID = this.$route.params.ruleID
+          var promise = putAPItoken(API.alarmruleAPI+ruleID+'/',this.ruleData,this.token)
+        }else{
+          var promise = postAPItoken(API.alarmruleAPI,this.ruleData,this.token)
+        }
         promise.then((data) =>{
           if(data['status']){
-            var message = this.ruleData.name+'规则创建成功';
+            if(this.$route.params.action == 'edit'){
+              var message = '{'+this.ruleData.name+'}--规则编辑成功';
+            }else{
+              var message = '{'+this.ruleData.name+'}--规则创建成功';
+            }
           }else{
             var message = data['message'];
           }

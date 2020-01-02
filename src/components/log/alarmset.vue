@@ -65,7 +65,7 @@
           </tbody>
         </table>
     </div>
-    <paging :total="1"></paging>
+    <paging :total="total_record"></paging>
   </div>
 
 </div>
@@ -85,6 +85,7 @@ export default {
     return {
       token:null,
       rules:null,
+      total_record: 0,
       id_array: [],
       disabled:true,
       businesses:null,
@@ -143,6 +144,7 @@ export default {
       const rpromise = getAPItoken(url,this.token);
       rpromise.then((data) => {
         this.rules = data;
+        this.total_record = this.rules.length;
       })
     },
     alarmCreate(){

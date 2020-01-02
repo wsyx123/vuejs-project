@@ -35,5 +35,5 @@ export const Children = {
     alarmset:         {component: () => import('@/components/log/alarmset')},
     alarmcreate:      {component: () => import('@/components/log/alarmcreate')},
     alarmedit:        {component: () => import('@/components/log/alarmcreate')},
-    alarmlist:        {component: log}
+    alarmlist:        {component: () => import('@/components/log/alarmlist')}
 }
