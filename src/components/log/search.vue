@@ -436,7 +436,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import './common/table.css';
 #alert{
   position: fixed;

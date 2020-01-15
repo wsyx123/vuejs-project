@@ -122,6 +122,7 @@ export default {
   width: 77%;
   float: left;
   margin-top: 5px;
+  padding-right: 5px;
 }
 
 .dashboards{

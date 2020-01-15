@@ -15,5 +15,7 @@ const API = {
 	"structureAPI": "http://localhost:8080/api/structure/",
 	"adminbusinessAPI" : "http://localhost:8080/api/admin/business/",
 	"alarmruleAPI" : "http://localhost:8080/api/alarmrule/",
-	"expressionAPI" : "http://localhost:8080/api/expression/"
+	"expressionAPI" : "http://localhost:8080/api/expression/",
+	"alertAPI" : "http://localhost:8080/api/alert/",
+	"homeAPI" : "http://localhost:8080/api/home/"
 }
